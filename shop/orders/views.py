@@ -30,7 +30,7 @@ class CartView(View):
         total_price = 0
         products = Product.objects.filter(pk__in=request.session['order'].keys())
         for product in products:
-            total_price += product.price * request.session['order'].get(str(product.id))
+            total_price += product.price * int(request.session['order'].get(str(product.id)))
 
         #save total price in session and send price to front
         request.session['order_price'] = str(total_price)
@@ -52,15 +52,38 @@ class OrderListView(View):
 
     def get(self, request, *args, **kwargs):
         if ('order' in request.session):
+            #get products in session and fill empty products fields
             products = Product.objects.filter(pk__in=request.session['order'].keys())
             for product in products:
                 product.amount = request.session['order'][str(product.id)]
-                product.sub_total = product.price * product.amount
+                product.sub_total = product.price * int(product.amount)
                 product.main_image = ProductImage.objects.get(product__pk=product.id, is_main=True)
         else:
             products = None
         return render(request, self.template_name, {'products': products})
 
     def post(self, request, *args, **kwargs):
-        pass
+
+        # modified dictionary for session
+        request.session.modified = True
+
+        # get id and amount of products from ajax response
+        data = request.POST
+        product_id = data.get("product_id")
+        amount = data.get("amount")
+
+        # set amount of product in session
+        request.session['order'][str(product_id)] = amount
+
+        # count total price for order
+        total_price = 0
+        products = Product.objects.filter(pk__in=request.session['order'].keys())
+        for product in products:
+            total_price += product.price * int(request.session['order'].get(str(product.id)))
+
+        #save total price in session
+        request.session['order_price'] = str(total_price)
+
+        return JsonResponse({'order_price': total_price})
+
 
