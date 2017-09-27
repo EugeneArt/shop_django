@@ -1,0 +1,83 @@
+{% extends 'products/base_product.html' %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+		<div class="container">
+			<ol class="breadcrumb breadcrumb1 animated wow slideInLeft animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: slideInLeft;">
+                <li>
+                    <a href="{% url 'home' %}">
+                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home
+                    </a>
+                </li>
+
+                {% if category %}
+                     <li class="active">{{ category |title }}</li>
+                {% endif %}
+
+                {% if subcategory %}
+                     <li class="active">{{ subcategory |title }}</li>
+                {% endif %}
+
+                <li class="active">{{ title |title }}</li>
+			</ol>
+		</div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="products">
+        <div class="container">
+            <h2>{{title |title}}</h2>
+            <div class="col-md-9">
+                <div class="content-top1">
+                    {% for product_item in products %}
+                        <div class="col-md-4 col-md4">
+                            <div class="col-md1 simpleCart_shelfItem">
+                                <a href="{% url 'product' product_item.product.id%}">
+                                    <img class="img-responsive" src="{{product_item.image.url}}" alt="" />
+                                </a>
+                                <h3><a href="">{{product_item.product.name}}</a></h3>
+                                <div class="price">
+                                        <h5 class="item_price">${{product_item.product.price}}</h5>
+                                        <button class="item_add" data-id="{{ product_item.product.id }}">Add To Cart</button>
+                                        <div class="clearfix"> </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% if forloop.counter|divisibleby:3 %}
+                    <div class="clearfix"> </div>
+
+                </div>
+                 <div class="content-top1">
+                        {% endif %}
+                    {% endfor %}
+                 </div>
+            </div>
+            {{ block.super }}
+            <div class="clearfix"> </div>
+        </div>
+        <div class="container">
+        <div class="col-md-4"></div>
+            <div class="col-md-4">
+                {% block pagination %}
+              {% if is_paginated %}
+                  <div class="pagination">
+                      <span class="page-links">
+                          {% if page_obj.has_previous %}
+                              <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+                          {% endif %}
+                          <span class="page-current">
+                              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                          </span>
+                          {% if page_obj.has_next %}
+                              <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+                          {% endif %}
+                      </span>
+                  </div>
+              {% endif %}
+            {% endblock %}
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+{% endblock %}
