@@ -8,16 +8,16 @@
 				</div>
 			<div class="col-sm-4 world animated wow fadeInRight" data-wow-delay=".5s">
 					<div class="cart box_1">
-						<a href="">
+						<a href="{% url 'order' %}">
 						<h3> <div class="total">
 							<span class="total_price">$ {{ order_price }}</span></div>
 							<img src="{% static 'images/cart.png' %}" alt=""/></h3>
 						</a>
-						<p><a href="javascript:;" class="cart__clear">Empty Cart</a></p>
-                        <form id="form-cart" action="{% url 'put_product_in_basket' %} ">
+						<p><a href="" class="cart__clear">Empty Cart</a></p>
+                        <form id="form-cart" action="{% url 'put_product_in_basket' %}">
                             {% csrf_token %}
                         </form>
-                        <form id="form-clear-cart" action="{% url 'clear_basket' %} ">
+                        <form id="form-clear-cart" action="{% url 'clear_basket' %}">
                             {% csrf_token %}
                         </form>
 					</div>

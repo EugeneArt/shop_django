@@ -1,6 +1,8 @@
 from django.http import JsonResponse
 from products.models import Product
+from orders.models import Order
 from django.views import View
+from django.views.generic import ListView
 
 class CartView(View):
 
@@ -37,9 +39,14 @@ class CartView(View):
         return JsonResponse(return_dict)
 
 class CartClearView(View):
+
     def post(self, request):
         if ('order' in request.session):
             del request.session['order']
             del request.session['order_price']
 
         return JsonResponse({'status': 'cart is clear'})
+
+class OrderListView(ListView):
+    model = Order
+    template_name = 'orders/order.html'
