@@ -17,11 +17,11 @@ class SubcategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['subcategory','name','price', 'sizes','is_active','created', 'updated']
+    list_display = ['subcategory','name','price', 'sizes','created', 'updated']
     inlines = [ProductImageInline]
     search_fields = ['name']
-    list_filter = ['is_active']
+
 @admin.register(ProductImage)
 class ProductImageAdmin(admin.ModelAdmin):
-    list_display = ['product', 'image', 'is_main', 'is_active']
+    list_display = ['product', 'image', 'is_main']
     list_filter = ['is_main']

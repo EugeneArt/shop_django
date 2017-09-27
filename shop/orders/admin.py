@@ -9,6 +9,7 @@ class ProductInOrderInline(admin.TabularInline):
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['total_price','customer_address', 'comments','is_active']
     inlines = [ProductInOrderInline]
+    list_filter = ['is_active']
 
 @admin.register(ProductInOrder)
 class ProductInOrderAdmin(admin.ModelAdmin):
