@@ -18,8 +18,8 @@ $(document).ready(function () {
            cache: true,
            success: function (data) {
                console.log('OK');
-               console.log(data.total_price);
-                $('.total_price').text(data.total_price + " $");
+               console.log(data.order_price);
+                $('.total_price').text(data.order_price + " $");
            },
            error: function (error) {
                console.log('error');

@@ -5,10 +5,10 @@ def products_in_basket(request):
     if not session_key:
         request.session.cycle_key()
 
-    if (request.session.get('total_price')):
-        total_price = request.session['total_price']
+    if (request.session.get('order_price')):
+        total_price = request.session['order_price']
     else:
         total_price = 0
 
-    context_data['total_price'] = total_price
+    context_data['order_price'] = total_price
     return context_data

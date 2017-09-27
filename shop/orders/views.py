@@ -1,47 +1,45 @@
 from django.http import JsonResponse
 from products.models import Product
+from django.views import View
 
-def put_product_in_basket(request):
-    return_dict = dict()
-    data = request.POST
-    product_id = data.get("product_id")
+class CartView(View):
 
-    if ('pruducts' in request.session):
-        array_of_id = request.session['pruducts'].split(",")
+    def post(self, request):
 
-        if (product_id in array_of_id):
-            request.session[product_id] = int(request.session[product_id]) + 1
+        return_dict = dict()
+
+        # modified dictionary for session
+        request.session.modified = True
+
+        #get id of product from ajax response
+        data = request.POST
+        product_id = data.get("product_id")
+
+        #add product in session order
+        if('order' in request.session):
+            if(product_id in request.session['order']):
+                request.session['order'][str(product_id)] = int(request.session['order'][str(product_id)]) + 1
+            else:
+                request.session['order'][str(product_id)] = 1
         else:
-            request.session['pruducts'] = request.session['pruducts'] + ',' + product_id
-            array_of_id.append(product_id)
-            request.session[product_id] = 1
+            request.session['order'] = dict.fromkeys(product_id, 1)
 
-        products = Product.objects.filter(pk__in=array_of_id)
+        #count total price for order
         total_price = 0
-        for item in products:
-            count = int(request.session.get(str(item.id)))
-            total_price += item.price * count
+        products = Product.objects.filter(pk__in=request.session['order'].keys())
+        for product in products:
+            total_price += product.price * request.session['order'].get(str(product.id))
 
-        request.session['total_price'] = str(total_price)
-        return_dict["total_price"] = total_price
-    else:
-        product = Product.objects.get(pk=product_id)
-        request.session['pruducts'] = product_id
-        request.session[product_id] = 1
-        request.session['total_price'] = str(product.price)
+        #save total price in session and send price to front
+        request.session['order_price'] = str(total_price)
+        return_dict["order_price"] = total_price
 
-        return_dict["total_price"] = product.price
+        return JsonResponse(return_dict)
 
-    return JsonResponse(return_dict)
+class CartClearView(View):
+    def post(self, request):
+        if ('order' in request.session):
+            del request.session['order']
+            del request.session['order_price']
 
-def clear_basket(request):
-    if ('pruducts' in request.session):
-        array_of_id = request.session['pruducts'].split(",")
-        for key in array_of_id:
-            if(key in request.session):
-                del request.session[key]
-
-        del request.session['pruducts']
-        del request.session['total_price']
-
-    return JsonResponse({'status': 'ok'})
+        return JsonResponse({'status': 'cart is clear'})

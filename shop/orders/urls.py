@@ -1,8 +1,8 @@
 from django.conf.urls import url
-from . import views
+from orders.views import CartView, CartClearView
 
 
 urlpatterns = [
-    url(r'^put_product_in_basket', views.put_product_in_basket, name='put_product_in_basket'),
-    url(r'^clear_basket', views.clear_basket, name='clear_basket'),
+    url(r'^put_product_in_basket', CartView.as_view(), name='put_product_in_basket'),
+    url(r'^clear_basket', CartClearView.as_view(), name='clear_basket'),
 ]
