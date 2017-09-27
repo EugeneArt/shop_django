@@ -20,6 +20,7 @@ class ProductInOrder(models.Model):
     order = models.ForeignKey(Order, blank=True, null=True, default=None)
     product = models.ForeignKey(Product, blank=True, null=True, default=None)
     amount = models.IntegerField(default=1)
+    sub_total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     def __str__(self):
         return "Product in order %s" % self.product.name

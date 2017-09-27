@@ -1,8 +1,8 @@
 from django.http import JsonResponse
-from products.models import Product
+from django.shortcuts import render
+from products.models import Product, ProductImage
 from orders.models import Order
 from django.views import View
-from django.views.generic import ListView
 
 class CartView(View):
 
@@ -47,6 +47,20 @@ class CartClearView(View):
 
         return JsonResponse({'status': 'cart is clear'})
 
-class OrderListView(ListView):
-    model = Order
+class OrderListView(View):
     template_name = 'orders/order.html'
+
+    def get(self, request, *args, **kwargs):
+        if ('order' in request.session):
+            products = Product.objects.filter(pk__in=request.session['order'].keys())
+            for product in products:
+                product.amount = request.session['order'][str(product.id)]
+                product.sub_total = product.price * product.amount
+                product.main_image = ProductImage.objects.get(product__pk=product.id, is_main=True)
+        else:
+            products = None
+        return render(request, self.template_name, {'products': products})
+
+    def post(self, request, *args, **kwargs):
+        pass
+
