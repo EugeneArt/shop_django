@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 
 from products.models import Product, ProductImage
-from orders.models import Order
+from orders.models import ProductInOrder
 
 from django.views import View
 from django.views.generic.edit import FormView
@@ -97,10 +97,22 @@ class OrderCheckoutView(FormView):
     form_class = OrderForm
     success_url = '/success-order/'
 
+    def get_initial(self):
+        initial = super(OrderCheckoutView, self).get_initial()
+
+        initial['total_price'] = self.request.session['order_price']
+        return initial
+
     def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
-        # form.send_email()
+        order = form.save()
+
+        #fill products in order for Order in session
+        for id, amount in self.request.session['order'].items():
+            product = Product.objects.get(pk=id)
+            sub_total = product.price * int(amount)
+            product_in_order = ProductInOrder(product=product, order=order, amount=amount, sub_total=sub_total)
+            product_in_order.save(force_insert=True)
+
         return super(OrderCheckoutView, self).form_valid(form)
 
 

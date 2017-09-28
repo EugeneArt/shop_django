@@ -15,7 +15,15 @@
 }
 .form-checkout-order p #id_total_price{
     width: 15%;
+    border: none;
+    font-size: 1.2rem;
 }
+.form-checkout-order p > #id_total_price:after {
+    content: ' $';
+    font-size: 1.2rem;
+    color: #000;
+}
+
 .form-checkout-order p textarea{
     width: 100%;
     border: 1px solid #fa03bb;
