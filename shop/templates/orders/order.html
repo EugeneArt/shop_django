@@ -26,7 +26,7 @@
 		  </tr>
             {% endfor %}
 	</table>
-	<a href="#" class=" to-buy">PROCEED TO BUY</a>
+	<a href="{% url 'order_checkout' %}" class=" to-buy">PROCEED TO BUY</a>
      {% else %}
          <h2>No products in cart</h2>
      {% endif %}

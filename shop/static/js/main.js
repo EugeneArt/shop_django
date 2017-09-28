@@ -58,7 +58,7 @@ $(document).ready(function () {
            var amount = $(this).val();
            var productPrice =  $(this).closest('.check').siblings('.order-item__price').text().slice(1);
            var total_price = parseFloat(productPrice) * Number(amount);
-           var subTotal = $(this).closest('.check').siblings('.order-item__subtotal').text('$ ' + total_price);
+           var subTotal = $(this).closest('.check').siblings('.order-item__subtotal').text('$ ' + total_price.toFixed(2));
 
            var csrfToken = $('#form-cart [name="csrfmiddlewaretoken"]').val();
            var productId = e.target.dataset.id;
@@ -77,11 +77,13 @@ $(document).ready(function () {
                cache: true,
                success: function (data) {
                     $('.total_price').text(data.order_price + " $");
+                    console.log(data);
                },
                error: function (error) {
                    console.log('error');
                }
-           })
+           });
+           $(this).off('change');
        });
    });
 

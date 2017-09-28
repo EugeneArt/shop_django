@@ -1,8 +1,14 @@
 from django.http import JsonResponse
 from django.shortcuts import render
+
 from products.models import Product, ProductImage
 from orders.models import Order
+
 from django.views import View
+from django.views.generic.edit import FormView
+
+from .forms import OrderForm
+
 
 class CartView(View):
 
@@ -85,5 +91,16 @@ class OrderListView(View):
         request.session['order_price'] = str(total_price)
 
         return JsonResponse({'order_price': total_price})
+
+class OrderCheckoutView(FormView):
+    template_name = 'orders/order-form.html'
+    form_class = OrderForm
+    success_url = '/success-order/'
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        # form.send_email()
+        return super(OrderCheckoutView, self).form_valid(form)
 
 

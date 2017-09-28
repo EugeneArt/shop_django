@@ -1,0 +1,32 @@
+.form-checkout-order {
+}
+.form-checkout-order p {
+    margin-bottom: 10px;
+}
+.form-checkout-order p > label {
+    display: block;
+    color: #7e7e7e;
+    font-size: 1.2rem;
+    padding: 0 0 5px 5px;
+}
+.form-checkout-order p > input {
+    width: 50%;
+    border: 1px solid #fa03bb;
+}
+.form-checkout-order p #id_total_price{
+    width: 15%;
+}
+.form-checkout-order p textarea{
+    width: 100%;
+    border: 1px solid #fa03bb;
+}
+.form-checkout-order p:last-child input{
+    width: 30%;
+    background-color: #fa03bb;
+    color: #fff;
+    border: 1px solid #7e7e7e;
+}
+.form-checkout-order p:last-child input:hover{
+    background-color: #7e7e7e;
+    border: 1px solid #fa03bb;
+}
