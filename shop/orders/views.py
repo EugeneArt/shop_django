@@ -109,12 +109,12 @@ class OrderCheckoutView(FormView):
         order = form.save()
 
         #fill products in order for Order in session
+        products_in_order = []
         for id, amount in self.request.session['order'].items():
-            product = Product.objects.get(pk=id)
-            sub_total = product.price * int(amount)
-            product_in_order = ProductInOrder(product=product, order=order, amount=amount, sub_total=sub_total)
-            product_in_order.save()
+            products_in_order.append(ProductInOrder(product_id=id, order=order, amount=amount))
 
+        #save all products in oder in db
+        ProductInOrder.objects.bulk_create(products_in_order)
         return super(OrderCheckoutView, self).form_valid(form)
 
 class OrderSuccessView(TemplateView):
