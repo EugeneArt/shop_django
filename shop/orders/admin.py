@@ -1,5 +1,7 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from .models import Order, ProductInOrder
+
 
 class ProductInOrderInline(admin.TabularInline):
     model = ProductInOrder
@@ -15,6 +17,13 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(ProductInOrder)
 class ProductInOrderAdmin(admin.ModelAdmin):
-    list_display = ['order', 'product', 'amount']
+    list_display = ['order', 'product', 'amount', 'sub_total']
+    readonly_fields = ('sub_total',)
+
+    def sub_total(self, instance):
+        return format_html("<span>{} $</span>",instance.amount * instance.product.price)
+
+    sub_total.short_description = "Total price for products"
+
 
 
