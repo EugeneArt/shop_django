@@ -5,6 +5,8 @@ from products.models import Product, ProductImage
 from orders.models import ProductInOrder
 
 from django.views import View
+
+from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 
 from .forms import OrderForm
@@ -95,7 +97,7 @@ class OrderListView(View):
 class OrderCheckoutView(FormView):
     template_name = 'orders/order-form.html'
     form_class = OrderForm
-    success_url = '/success-order/'
+    success_url = '/order/success-order/'
 
     def get_initial(self):
         initial = super(OrderCheckoutView, self).get_initial()
@@ -111,8 +113,10 @@ class OrderCheckoutView(FormView):
             product = Product.objects.get(pk=id)
             sub_total = product.price * int(amount)
             product_in_order = ProductInOrder(product=product, order=order, amount=amount, sub_total=sub_total)
-            product_in_order.save(force_insert=True)
+            product_in_order.save()
 
         return super(OrderCheckoutView, self).form_valid(form)
 
+class OrderSuccessView(TemplateView):
+    template_name = 'orders/order-success.html'
 

@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from orders.views import CartView, CartClearView, OrderListView, OrderCheckoutView
+from orders.views import CartView, CartClearView, OrderListView, OrderCheckoutView, OrderSuccessView
 
 
 urlpatterns = [
@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^clear_basket/$', CartClearView.as_view(), name='clear_basket'),
     url(r'^order/$', OrderListView.as_view(), name='order'),
     url(r'^order/checkout/$', OrderCheckoutView.as_view(), name='order_checkout'),
+    url(r'^order/success-order/$', OrderSuccessView.as_view(), name='order_success'),
 ]
