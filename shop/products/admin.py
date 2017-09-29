@@ -25,3 +25,4 @@ class ProductAdmin(admin.ModelAdmin):
 class ProductImageAdmin(admin.ModelAdmin):
     list_display = ['product', 'image', 'is_main']
     list_filter = ['is_main']
+    readonly_fields = ('thumbnail',)

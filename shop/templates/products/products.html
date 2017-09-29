@@ -1,5 +1,6 @@
 {% extends 'products/base_product.html' %}
 
+
 {% block breadcrumbs %}
     <div class="breadcrumbs">
 		<div class="container">
@@ -34,7 +35,7 @@
                         <div class="col-md-4 col-md4">
                             <div class="col-md1 simpleCart_shelfItem">
                                 <a href="{% url 'product' product_item.product.id%}">
-                                    <img class="img-responsive" src="{{product_item.image.url}}" alt="" />
+                                    <img class="img-responsive" src="{{product_item.thumbnail.url}}" alt="" />
                                 </a>
                                 <h3><a href="">{{product_item.product.name}}</a></h3>
                                 <div class="price">
