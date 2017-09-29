@@ -1,5 +1,9 @@
 from django.views.generic import ListView, DetailView
-from products.models import Product, ProductImage
+from django.views.generic.edit import FormView
+from .forms import ProductCommentForm
+from .models import Product, ProductImage
+
+
 
 class ProductDetail(DetailView):
     model = Product
@@ -11,6 +15,15 @@ class ProductDetail(DetailView):
         context['category'] = self.kwargs['product_category']
         context['title'] = self.kwargs['product_subcategory']
         return context
+
+class ProductComment(FormView):
+    template_name = 'products/product-comment.html'
+    form_class = ProductCommentForm
+    success_url = '/thanks/'
+
+    def form_valid(self, form):
+
+        return super(ProductComment, self).form_valid(form)
 
 class ProductList(ListView):
     model = ProductImage

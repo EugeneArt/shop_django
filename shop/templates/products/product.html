@@ -73,7 +73,7 @@
                                     <p>{{ comment.comment }}</p>
                                 </div>
                             {% endfor %}
-                        <a href="">Add comment</a>
+                        <a href="{% url 'product_comment' product.subcategory.category.category_name product.subcategory.subcategory_name product.id %}">Add comment</a>
                     </div>
 
                 </div>
