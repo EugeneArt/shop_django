@@ -38,3 +38,38 @@
     background-color: #7e7e7e;
     border: 1px solid #fa03bb;
 }
+.comments h2{
+    font-size: 1.8em;
+    color: #fa03bb;
+    line-height: 1.5em;
+    font-family: 'Poiret One', cursive;
+    font-weight: 700;
+    padding: 10px 0;
+}
+.comments a {
+    float: right;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #fa03bb;
+    font-size: 0.8rem;
+    text-decoration: none;
+    font-style: italic;
+    color: #fff;
+}
+.comments a:hover {
+    background-color: #7e7e7e;
+}
+.comment-item {
+    border-bottom: 1px dotted #fa03bb;
+}
+.comment-item h4 {
+    padding-top: 6px;
+    font-size: 0.8rem;
+    text-align: right;
+}
+.comment-item p {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: #7e7e7e;
+    padding-left: 15px;
+}

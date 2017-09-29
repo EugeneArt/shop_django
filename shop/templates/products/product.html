@@ -4,7 +4,7 @@
     <div class="single">
         <div class="container">
             <div class="col-md-9">
-            <div class="col-md-5 grid">
+                <div class="col-md-5 grid">
                 <div class="flexslider">
                       <ul class="slides">
                           {% for image_item in product.productimage_set.all %}
@@ -15,7 +15,7 @@
                       </ul>
                 </div>
             </div>
-        <div class="col-md-7 single-top-in">
+                <div class="col-md-7 single-top-in">
                                 <div class="single-para simpleCart_shelfItem">
                                     <h2>{{product.name}}</h2>
                                     <p>{{product.description}}</p>
@@ -39,8 +39,21 @@
                                     <a class="cart item_add" data-id="{{ product.id }}">Add to cart</a>
                                 </div>
                             </div>
-                    <div class="clearfix"> </div>
-        </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12">
+                    <div class="comments">
+                        <h2>Comments to product</h2>
+                            {% for comment in product.productcomment_set.all %}
+                                <div class="comment-item">
+                                    <h4>{{ comment.name }}</h4>
+                                    <p>{{ comment.comment }}</p>
+                                </div>
+                            {% endfor %}
+                        <a href="">Add comment</a>
+                    </div>
+
+                </div>
+            </div>
              {{ block.super }}
         </div>
     </div>
