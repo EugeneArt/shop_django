@@ -3,7 +3,7 @@ from django.views.generic.edit import FormView
 from .forms import ContactForm
 
 class ContactView(FormView):
-    template_name = 'orders/order-form.html'
+    template_name = 'contact/contact-form.html'
     form_class = ContactForm
     success_url = '/contact/success-contact/'
 

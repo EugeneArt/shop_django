@@ -5,14 +5,13 @@ from .forms import ProductCommentForm
 from .models import Product, ProductImage, Category
 from taggit.models import Tag
 
-class CategoryTagMixin(object):
+class TagMixin(object):
     def get_context_data(self, **kwargs):
-        context = super(CategoryTagMixin, self).get_context_data(**kwargs)
+        context = super(TagMixin, self).get_context_data(**kwargs)
         context['tags'] = Tag.objects.all()
-        context['categories'] = Category.objects.all()
         return context
 
-class ProductDetail(CategoryTagMixin, DetailView):
+class ProductDetail(TagMixin, DetailView):
     model = Product
     template_name = 'products/product.html'
     context_object_name = 'product'
@@ -42,7 +41,7 @@ class ProductComment(FormView):
                            'pk': self.kwargs['pk'],
                        })
 
-class ProductList(CategoryTagMixin, ListView):
+class ProductList(TagMixin, ListView):
     model = ProductImage
     template_name = 'products/products.html'
     context_object_name = 'products'
@@ -79,7 +78,7 @@ class SubcategoryProductList(ProductList):
         context['title'] = self.kwargs['product_subcategory']
         return context
 
-class TagIndexView(CategoryTagMixin, ListView):
+class TagIndexView(TagMixin, ListView):
     model = ProductImage
     template_name = 'products/products.html'
     context_object_name = 'products'

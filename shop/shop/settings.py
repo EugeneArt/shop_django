@@ -65,6 +65,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'products.context_processors.products_catecory_context',
                 'orders.context_processors.products_in_basket',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
