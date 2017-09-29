@@ -7,5 +7,5 @@ urlpatterns = [
     url(r'^clear_basket/$', CartClearView.as_view(), name='clear_basket'),
     url(r'^order/$', OrderListView.as_view(), name='order'),
     url(r'^order/checkout/$', OrderCheckoutView.as_view(), name='order_checkout'),
-    url(r'^order/success-order/$', OrderSuccessView.as_view(), name='order_success'),
+    url(r'^order/success/$', OrderSuccessView.as_view(), name='order_success'),
 ]

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+		<div class="container">
+			<ol class="breadcrumb breadcrumb1 animated wow slideInLeft animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: slideInLeft;">
+                <li>
+                    <a href="{% url 'home' %}">
+                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home
+                    </a>
+                </li>
+                <li class="active">Contact</li>
+			</ol>
+		</div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="contact">
+                <div class="container">
+                    <h3>Your message send for us. Thank you! </h3>
+                </div>
+    </div>
+    <div class="map">
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3279847.2716062404!2d145.46948275!3d-36.60289065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad4314b7e18954f%3A0x5a4efce2be829534!2sVictoria%2C+Australia!5e0!3m2!1sen!2sin!4v1443674224626" width="100%" height="" frameborder="0" style="border:0" allowfullscreen></iframe>
+	</div>
+{% endblock %}

@@ -97,7 +97,7 @@ class OrderListView(View):
 class OrderCheckoutView(FormView):
     template_name = 'orders/order-form.html'
     form_class = OrderForm
-    success_url = '/order/success-order/'
+    success_url = '/order/success/'
 
     def get_initial(self):
         initial = super(OrderCheckoutView, self).get_initial()
