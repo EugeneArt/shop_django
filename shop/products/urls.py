@@ -10,5 +10,4 @@ urlpatterns = [
         name='product'),
     url(r'^products/(?P<product_category>\w+)/(?P<product_subcategory>\w+)/(?P<pk>\w+)/comment/$', ProductComment.as_view(),
         name='product_comment'),
-
 ]

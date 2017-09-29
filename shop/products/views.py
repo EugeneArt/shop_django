@@ -1,5 +1,6 @@
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormView
+from django.urls import reverse
 from .forms import ProductCommentForm
 from .models import Product, ProductImage
 
@@ -22,8 +23,18 @@ class ProductComment(FormView):
     success_url = '/thanks/'
 
     def form_valid(self, form):
-
+        instance = form.save(commit=False)
+        instance.product_id = self.kwargs['pk']
+        instance.save()
         return super(ProductComment, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('product',
+                       kwargs={
+                           'product_category': self.kwargs['product_category'],
+                           'product_subcategory': self.kwargs['product_subcategory'],
+                           'pk': self.kwargs['pk'],
+                       })
 
 class ProductList(ListView):
     model = ProductImage
