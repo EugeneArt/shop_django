@@ -2,11 +2,22 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormView
 from django.urls import reverse
 from .forms import ProductCommentForm
-from .models import Product, ProductImage
+from .models import Product, ProductImage, Category
+from taggit.models import Tag
 
+class TagMixin(object):
+    def get_context_data(self, **kwargs):
+        context = super(TagMixin, self).get_context_data(**kwargs)
+        context['tags'] = Tag.objects.all()
+        return context
 
+class CategoryMixin(object):
+    def get_context_data(self, **kwargs):
+        context = super(CategoryMixin, self).get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
 
-class ProductDetail(DetailView):
+class ProductDetail(CategoryMixin, TagMixin, DetailView):
     model = Product
     template_name = 'products/product.html'
     context_object_name = 'product'
@@ -36,7 +47,7 @@ class ProductComment(FormView):
                            'pk': self.kwargs['pk'],
                        })
 
-class ProductList(ListView):
+class ProductList(TagMixin, CategoryMixin, ListView):
     model = ProductImage
     template_name = 'products/products.html'
     context_object_name = 'products'
@@ -73,3 +84,11 @@ class SubcategoryProductList(ProductList):
         context['title'] = self.kwargs['product_subcategory']
         return context
 
+class TagIndexView(TagMixin, ListView):
+    model = ProductImage
+    template_name = 'products/products.html'
+    context_object_name = 'products'
+    paginate_by = 6
+
+    def get_queryset(self):
+        return ProductImage.objects.filter(product__tags__slug=self.kwargs.get('slug'))
