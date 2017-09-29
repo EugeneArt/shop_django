@@ -1,5 +1,5 @@
 from django.views.generic import ListView
-from products.models import ProductImage
+from products.models import ProductImage, Category
 
 class ProductList(ListView):
     model = ProductImage
@@ -14,4 +14,5 @@ class ProductList(ListView):
 
         context['products_for_men'] = products_for_men
         context['products_for_woman'] = products_for_woman
+        context['categories'] = Category.objects.all
         return context
