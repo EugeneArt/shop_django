@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Subcategory, Product, ProductImage
+from .models import Category, Subcategory, Product, ProductImage, ProductComment
 
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
@@ -26,3 +26,7 @@ class ProductImageAdmin(admin.ModelAdmin):
     list_display = ['product', 'image', 'is_main']
     list_filter = ['is_main']
     readonly_fields = ('thumbnail',)
+
+@admin.register(ProductComment)
+class ProductCommentAdmin(admin.ModelAdmin):
+    list_display = ['product', 'name', 'comment']

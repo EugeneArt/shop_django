@@ -94,3 +94,11 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return "%s" % self.id
+
+class ProductComment(models.Model):
+    product = models.ForeignKey(Product, blank=True, null=True, default=None)
+    name = models.CharField(max_length=128, blank=True, null=True, default=None)
+    comment = models.TextField(blank=True, null=True, default=None)
+
+    def __str__(self):
+        return "%s" % self.name
