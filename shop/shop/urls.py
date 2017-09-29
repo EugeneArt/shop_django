@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^', include('landing.urls')),
     url(r'^', include('products.urls')),
     url(r'^', include('orders.urls')),
+    url(r'^', include('contact.urls')),
 ] \
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
