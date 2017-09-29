@@ -34,7 +34,7 @@
                     {% for product_item in products %}
                         <div class="col-md-4 col-md4">
                             <div class="col-md1 simpleCart_shelfItem">
-                                <a href="{% url 'product' product_item.product.id%}">
+                                <a href="{% url 'product' product_item.product.subcategory.category.category_name product_item.product.subcategory.subcategory_name product_item.product.id %}">
                                     <img class="img-responsive" src="{{product_item.thumbnail.url}}" alt="" />
                                 </a>
                                 <h3><a href="">{{product_item.product.name}}</a></h3>
