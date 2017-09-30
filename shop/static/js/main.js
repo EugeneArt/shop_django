@@ -1,5 +1,29 @@
 $(document).ready(function () {
 
+    // $("#autocomplete").autocomplete({
+    //   source: function(request, response){
+    //     var url = $('#search-form').attr('action');
+    //     console.log(url);
+    //     $.ajax({
+    //       url: url,
+    //       dataType: "jsonp",
+    //       data:{
+    //         1: 'send send'
+    //       },
+    //       success: function(data){
+    //         response($.map(data.geonames, function(item){
+    //           return{
+    //             label: item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
+    //             value: item.name
+    //           }
+    //         }));
+    //       }
+    //     });
+    //   },
+    //   minLength: 2
+    // });
+
+
    $('.item_add').click(function(e) {
        e.preventDefault();
        var productId = e.target.dataset.id;
@@ -86,7 +110,4 @@ $(document).ready(function () {
            $(this).off('change');
        });
    });
-
-
-
 });

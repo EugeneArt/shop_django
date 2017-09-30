@@ -95,10 +95,9 @@
 				<div id="small-dialog" class="mfp-hide">
 				<div class="search-top">
 						<div class="login">
-							<form action="#" method="post">
+							<form action="{% url 'search' %}" id='search-form' method="GET">
 								<input type="submit" value="">
-								<input type="text" name="search" value="Type something..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
-
+								<input id="autocomplete" type="text" name="search" placeholder="Type something..." >
 							</form>
 						</div>
 						<p>	Shopping</p>

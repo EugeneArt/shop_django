@@ -1,9 +1,13 @@
+from django.http import JsonResponse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormView
+from django.views import View
 from django.urls import reverse
 from .forms import ProductCommentForm
 from .models import Product, ProductImage, Category
 from taggit.models import Tag
+from django.db.models import Q
+
 
 class TagMixin(object):
     def get_context_data(self, **kwargs):
@@ -86,3 +90,13 @@ class TagIndexView(TagMixin, ListView):
 
     def get_queryset(self):
         return ProductImage.objects.filter(product__tags__slug=self.kwargs.get('slug'))
+
+class SearchListView(ProductList):
+    def get_queryset(self):
+        query = self.request.GET['search']
+        products = ProductImage.objects.filter(
+                                                Q(product__name__icontains=query) |
+                                                Q(product__subcategory__subcategory_name__icontains=query) |
+                                                Q(product__subcategory__category__category_name__icontains=query)
+                                                )
+        return products
