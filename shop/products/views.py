@@ -98,5 +98,18 @@ class SearchListView(ProductList):
                                                 Q(product__name__icontains=query) |
                                                 Q(product__subcategory__subcategory_name__icontains=query) |
                                                 Q(product__subcategory__category__category_name__icontains=query)
-                                                )
+                                              )
         return products
+
+class SearchAutocompleteView(View):
+
+    def get(self, request):
+
+        query = request.GET['query']
+        products = Product.objects.filter(
+                                                Q(name__icontains=query) |
+                                                Q(subcategory__subcategory_name__icontains=query) |
+                                                Q(subcategory__category__category_name__icontains=query)
+                                              )
+        data = [product.name for product in products]
+        return JsonResponse({'query': data})

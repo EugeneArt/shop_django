@@ -1,28 +1,34 @@
 $(document).ready(function () {
 
-    // $("#autocomplete").autocomplete({
-    //   source: function(request, response){
-    //     var url = $('#search-form').attr('action');
-    //     console.log(url);
-    //     $.ajax({
-    //       url: url,
-    //       dataType: "jsonp",
-    //       data:{
-    //         1: 'send send'
-    //       },
-    //       success: function(data){
-    //         response($.map(data.geonames, function(item){
-    //           return{
-    //             label: item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
-    //             value: item.name
-    //           }
-    //         }));
-    //       }
-    //     });
-    //   },
-    //   minLength: 2
-    // });
+    $("#autocomplete").keyup(function () {
+        $('.autocomplete-list').empty();
+        var val = this.value;
+        data = {
+         query: this.value
+        };
+        if(this.value.length > 2) {
+            $.ajax({
+               url: '/autocomplete/',
+               type: 'GET',
+               data: data,
+               cache: true,
+               success: function (data) {
+                  $.each(data.query, function (index, value) {
+                    $('.autocomplete-list').append("<p class='autocomplete-list__item'>" + value + "</p>");
+                   });
 
+                  $('.autocomplete-list__item').click(function () {
+                        var text = $(this).text();
+                        $("#autocomplete").val(text);
+                  });
+               },
+               error: function (error) {
+                   console.log('error');
+               }
+            })
+        }
+
+    });
 
    $('.item_add').click(function(e) {
        e.preventDefault();
@@ -111,3 +117,4 @@ $(document).ready(function () {
        });
    });
 });
+

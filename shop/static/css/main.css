@@ -73,3 +73,9 @@
     color: #7e7e7e;
     padding-left: 15px;
 }
+.autocomplete-list {
+    position: absolute;
+}
+.autocomplete-list__item {
+    cursor: pointer;
+}

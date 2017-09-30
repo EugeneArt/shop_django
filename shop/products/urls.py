@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from products.views import ProductList, ProductDetail, CategoryProductList, SubcategoryProductList, ProductComment, TagIndexView, SearchListView
+from products.views import ProductList, ProductDetail, CategoryProductList, SubcategoryProductList, ProductComment, TagIndexView, SearchListView, SearchAutocompleteView
 
 
 urlpatterns = [
@@ -12,4 +12,5 @@ urlpatterns = [
         name='product_comment'),
     url(r'^tag/(?P<slug>[-\w]+)/$', TagIndexView.as_view(), name='tagged'),
     url(r'^search/$', SearchListView.as_view(), name='search'),
+    url(r'^autocomplete/$', SearchAutocompleteView.as_view(), name='autocomplete'),
 ]
