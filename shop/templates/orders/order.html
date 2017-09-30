@@ -14,7 +14,7 @@
 		  </tr>
             {% for product in products %}
 		  <tr>
-			<td class="ring-in"><a href="{% url 'product' product.id  %}" class="at-in"><img src="{{ product.main_image.image.url }}" class="img-responsive" alt=""></a>
+			<td class="ring-in"><a href="{% url 'product' product.subcategory.category.category_name product.subcategory.subcategory_name product.id %}" class="at-in"><img src="{{ product.main_image.image.url }}" class="img-responsive" alt=""></a>
 			<div class="sed">
 				<h5>{{ product.name }}</h5>
 				<p>{{ product.description }}</p>

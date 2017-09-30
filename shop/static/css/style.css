@@ -674,7 +674,7 @@ p.footer-class a:hover{
 	display:block;
 	padding:0 0 0.5em;
 }
-.contact-bottom  input[type="text"]{
+.contact-bottom  input[type="text"],.contact-bottom  input[type="email"]{
 	width:100%;
 	padding:0.7em;	
 	border:1px solid #bbb;
@@ -2555,6 +2555,9 @@ h3.cate {
     margin: 0.5em 0 0;
 }
 .contact-bottom input[type="text"] {
+  padding: 0.5em;
+}
+.contact-bottom input[type="email"] {
   padding: 0.5em;
 }
 .contact-bottom-top {

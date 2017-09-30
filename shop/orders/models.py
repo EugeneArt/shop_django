@@ -3,10 +3,10 @@ from products.models import Product
 
 class Order(models.Model):
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    customer_name = models.CharField(max_length=128, blank=True, null=True, default=None)
-    customer_email = models.EmailField(blank=True, null=True, default=None)
-    customer_phone = models.CharField(max_length=48, blank=True, null=True, default=None)
-    customer_address = models.CharField(max_length=128, blank=True, null=True, default=None)
+    customer_name = models.CharField(max_length=128)
+    customer_email = models.EmailField(unique=True)
+    customer_phone = models.CharField(max_length=48)
+    customer_address = models.CharField(max_length=128,blank=True, null=True, default=None)
     comments = models.TextField(blank=True, null=True, default=None)
     is_active = models.BooleanField(default=True)
 

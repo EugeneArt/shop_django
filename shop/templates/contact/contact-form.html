@@ -21,11 +21,35 @@
                     <h3>Contact</h3>
                     <div class="contact-grids">
                         <div class="contact-form">
-                            <form action="" method="post">
-                                {% csrf_token %}
-                                {{ form }}
-                               <input type="submit" value="Send">
-                            </form>
+                            <form action="#" method="POST">
+                                 {% csrf_token %}
+                                {{ form.non_field_errors }}
+								<div class="contact-bottom">
+									<div class="col-md-4 in-contact">
+                                        {{ form.contact_name.errors }}
+										<span>Name</span>
+										 {{ form.contact_name}}
+									</div>
+									<div class="col-md-4 in-contact">
+                                        {{ form.contact_email.errors }}
+										<span>Email</span>
+										 {{ form.contact_email}}
+									</div>
+									<div class="col-md-4 in-contact">
+                                         {{ form.contact_phone.errors }}
+										<span>Phonenumber</span>
+										{{ form.contact_phone}}
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+
+								<div class="contact-bottom-top">
+                                    {{ form.message.errors }}
+									<span>Message</span>
+									 {{ form.message }}
+									</div>
+								<input type="submit" value="Send">
+							</form>
                         </div>
                         <div class="address">
                         <div class=" address-more">

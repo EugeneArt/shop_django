@@ -32,7 +32,8 @@ class CartView(View):
             else:
                 request.session['order'][str(product_id)] = 1
         else:
-            request.session['order'] = dict.fromkeys(product_id, 1)
+            request.session['order'] = {}
+            request.session['order'][str(product_id)] = 1
 
         #count total price for order
         total_price = 0
@@ -115,6 +116,11 @@ class OrderCheckoutView(FormView):
 
         #save all products in oder in db
         ProductInOrder.objects.bulk_create(products_in_order)
+
+        #clear cart
+        if ('order' in self.request.session):
+            del self.request.session['order']
+            del self.request.session['order_price']
         return super(OrderCheckoutView, self).form_valid(form)
 
 class OrderSuccessView(TemplateView):
