@@ -48,9 +48,11 @@
                     {% if forloop.counter|divisibleby:3 %}
                     <div class="clearfix"> </div>
 
-                </div>
+                    </div>
                  <div class="content-top1">
                         {% endif %}
+                    {% empty %}
+                         <h2>Sorry, no products in this list.</h2>
                     {% endfor %}
                  </div>
             </div>
