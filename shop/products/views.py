@@ -24,6 +24,7 @@ class ProductDetail(TagMixin, DetailView):
         context = super(ProductDetail, self).get_context_data(**kwargs)
         context['category'] = self.kwargs['product_category']
         context['title'] = self.kwargs['product_subcategory']
+        context['tags'] = Tag.objects.filter(product__id=self.kwargs['pk'])
         return context
 
 class ProductCommentCreate(FormView):
