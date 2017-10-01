@@ -67,13 +67,16 @@
                 <div class="col-md-12">
                     <div class="comments">
                         <h2>Comments to product</h2>
-                            {% for comment in product.productcomment_set.all %}
+                            {% for comment in product.productcomment_set.all|slice:":3"%}
                                 <div class="comment-item">
                                     <h4>{{ comment.name }}</h4>
                                     <p>{{ comment.comment }}</p>
                                 </div>
                             {% endfor %}
-                        <a href="{% url 'product_comment' product.subcategory.category.category_name product.subcategory.subcategory_name product.id %}">Add comment</a>
+                            {% if product.productcomment_set.count > 3 %}
+                                 <a href="{% url 'product_comments' product.subcategory.category.category_name product.subcategory.subcategory_name product.id%}" class="comments__all">Show all coomments ({{ product.productcomment_set.count }})</a>
+                            {% endif %}
+                            <a class="comments__add" href="{% url 'product_comment' product.subcategory.category.category_name product.subcategory.subcategory_name product.id %}">Add comment</a>
                     </div>
 
                 </div>

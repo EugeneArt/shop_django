@@ -1,6 +1,5 @@
 {% extends 'products/base_product.html' %}
 
-
 {% block breadcrumbs %}
     <div class="breadcrumbs">
 		<div class="container">
@@ -26,42 +25,24 @@
 {% endblock %}
 
 {% block content %}
-    <div class="products">
+    <div class="single">
         <div class="container">
-            <h2>{{title |title}}</h2>
-            <div class="col-md-9">
-                <div class="content-top1">
-                    {% for product_item in products %}
-                        <div class="col-md-4 col-md4">
-                            <div class="col-md1 simpleCart_shelfItem">
-                                <a href="{% url 'product' product_item.product.subcategory.category.category_name product_item.product.subcategory.subcategory_name product_item.product.id %}">
-                                    <img class="img-responsive" src="{{product_item.thumbnail.url}}" alt="" />
-                                </a>
-                                <h3><a href="">{{product_item.product.name}}</a></h3>
-                                <div class="price">
-                                        <h5 class="item_price">${{product_item.product.price}}</h5>
-                                        <button class="item_add" data-id="{{ product_item.product.id }}">Add To Cart</button>
-                                        <div class="clearfix"> </div>
-                                </div>
+            <div class="col-md-12">
+                <div class="comments">
+                    <h2>Comments to product</h2>
+                        {% for comment in comments %}
+                            <div class="comment-item">
+                                <h4>{{ comment.name }}</h4>
+                                <p>{{ comment.comment }}</p>
                             </div>
-                        </div>
-                    {% if forloop.counter|divisibleby:3 %}
-                    <div class="clearfix"> </div>
-
-                    </div>
-                 <div class="content-top1">
-                        {% endif %}
-                    {% empty %}
-                         <h2>Sorry, no products in this list.</h2>
-                    {% endfor %}
-                 </div>
+                        {% endfor %}
+                        <a class="comments__add" href="{% url 'product_comment' category subcategory product %}">Add comment</a>
+                </div>
             </div>
-            {{ block.super }}
-            <div class="clearfix"> </div>
         </div>
-        <div class="container">
+         <div class="container">
             <div class="col-md-4"></div>
-                <div class="col-md-4">
+            <div class="col-md-4">
                     {% block pagination %}
                       {% if is_paginated %}
                           <div class="pagination">
@@ -80,7 +61,7 @@
                       {% endif %}
                     {% endblock %}
                 </div>
-            </div>
             <div class="col-md-4"></div>
         </div>
+    </div>
 {% endblock %}
