@@ -75,7 +75,7 @@ class ProductList(TagMixin, ListView):
 
 class CategoryProductList(ProductList):
     def get_queryset(self):
-        products = ProductImage.objects.filter(product__subcategory__category__category_name=self.kwargs['product_category'],
+        products = ProductImage.objects.filter(product__category__category_name=self.kwargs['product_category'],
                                                is_main=True)
         return products
 
@@ -86,7 +86,7 @@ class CategoryProductList(ProductList):
 
 class SubcategoryProductList(ProductList):
     def get_queryset(self):
-        products = ProductImage.objects.filter(product__subcategory__category__category_name=self.kwargs['product_category'],
+        products = ProductImage.objects.filter(product__category__category_name=self.kwargs['product_category'],
                                                is_main=True) \
                                         .filter(product__subcategory__subcategory_name=self.kwargs['product_subcategory'])
         return products
@@ -106,15 +106,24 @@ class TagIndexView(TagMixin, ListView):
     def get_queryset(self):
         return ProductImage.objects.filter(product__tags__slug=self.kwargs.get('slug'))
 
+    def get_context_data(self, **kwargs):
+        context = super(TagIndexView, self).get_context_data(**kwargs)
+        context['title'] = self.kwargs.get('slug')
+        return context
+
 class SearchListView(ProductList):
     def get_queryset(self):
         query = self.request.GET['search']
         products = ProductImage.objects.filter(
                                                 Q(product__name__icontains=query) |
                                                 Q(product__subcategory__subcategory_name__icontains=query) |
-                                                Q(product__subcategory__category__category_name__icontains=query)
+                                                Q(product__category__category_name__icontains=query)
                                               )
         return products
+    def get_context_data(self, **kwargs):
+        context = super(SearchListView, self).get_context_data(**kwargs)
+        context['title'] = self.request.GET['search']
+        return context
 
 class SearchAutocompleteView(View):
     def get(self, request):
@@ -122,7 +131,7 @@ class SearchAutocompleteView(View):
         products = Product.objects.filter(
                                                 Q(name__icontains=query) |
                                                 Q(subcategory__subcategory_name__icontains=query) |
-                                                Q(subcategory__category__category_name__icontains=query)
+                                                Q(category__category_name__icontains=query)
                                               )
         data = [product.name for product in products]
         return JsonResponse({'query': data})

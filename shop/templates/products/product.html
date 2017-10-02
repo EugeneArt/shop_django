@@ -75,9 +75,9 @@
                                 </div>
                             {% endfor %}
                             {% if product.productcomment_set.count > 3 %}
-                                 <a href="{% url 'product_comments' product.subcategory.category.category_name product.subcategory.subcategory_name product.id%}" class="comments__all">Show all coomments ({{ product.productcomment_set.count }})</a>
+                                 <a href="{% url 'product_comments' product.category.category_name product.subcategory.subcategory_name product.id%}" class="comments__all">Show all coomments ({{ product.productcomment_set.count }})</a>
                             {% endif %}
-                            <a class="comments__add" href="{% url 'product_comment' product.subcategory.category.category_name product.subcategory.subcategory_name product.id %}">Add comment</a>
+                            <a class="comments__add" href="{% url 'product_comment' product.category.category_name product.subcategory.subcategory_name product.id %}">Add comment</a>
                     </div>
 
                 </div>

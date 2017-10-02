@@ -20,7 +20,7 @@ class Subcategory(models.Model):
     subcategory_image = models.ImageField(upload_to='products_images/',default=None)
 
     def __str__(self):
-        return "%s, %s" % (self.category.category_name, self.subcategory_name)
+        return "%s" % self.subcategory_name
 
     def image_tag(self):
         return u'<img src="%s" />' % self.subcategory_image.url
@@ -37,6 +37,7 @@ class Product(models.Model):
         ('XL', 'XL'),
         ('XXL', 'XXL'),
     )
+    category = models.ForeignKey(Category, blank=True, null=True, default=None)
     subcategory = models.ForeignKey(Subcategory, blank=True, null=True, default=None)
     name = models.CharField(max_length=128, blank=True, null=True, default=None)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
@@ -49,7 +50,7 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "%s, %s: %s" % (self.subcategory, self.name, self.price)
+        return "%s/%s - %s: %s $" % (self.category, self.subcategory, self.name, self.price)
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, blank=True, null=True, default=None)

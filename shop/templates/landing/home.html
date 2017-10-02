@@ -11,10 +11,10 @@
 					{% for product_for_woman in products_for_woman %}
 					<div class="col-md-3 col-md2 animated wow fadeInLeft" data-wow-delay=".5s">
 						<div class="col-md1 simpleCart_shelfItem">
-							<a href="{% url 'product' product_for_woman.product.subcategory.category.category_name product_for_woman.product.subcategory.subcategory_name product_for_woman.product.id %}">
+							<a href="{% url 'product' product_for_woman.product.category.category_name product_for_woman.product.subcategory.subcategory_name product_for_woman.product.id %}">
 								<img class="img-responsive" src="{{product_for_woman.image.url}}" alt="" />
 							</a>
-							<h3><a href="{% url 'product' product_for_woman.product.subcategory.category.category_name product_for_woman.product.subcategory.subcategory_name product_for_woman.product.id %}">{{ product_for_woman.product.name }}</a></h3>
+							<h3><a href="{% url 'product' product_for_woman.product.category.category_name product_for_woman.product.subcategory.subcategory_name product_for_woman.product.id %}">{{ product_for_woman.product.name }}</a></h3>
 							<div class="price">
 									<h5 class="item_price">${{ product_for_woman.product.price }}</h5>
 									<button class="item_add">Add To Cart</button>
@@ -113,10 +113,10 @@
 				{% for product_for_men in products_for_men %}
 					<div class="col-md-3 col-md2 animated wow fadeInLeft" data-wow-delay=".5s">
 						<div class="col-md1 simpleCart_shelfItem">
-							<a href="{% url 'product' product_for_men.product.subcategory.category.category_name product_for_men.product.subcategory.subcategory_name product_for_men.product.id %}">
+							<a href="{% url 'product' product_for_men.product.category.category_name product_for_men.product.subcategory.subcategory_name product_for_men.product.id %}">
 								<img class="img-responsive" src="{{product_for_men.image.url}}" alt="" />
 							</a>
-							<h3><a href="{% url 'product' product_for_men.product.subcategory.category.category_name product_for_men.product.subcategory.subcategory_name product_for_men.product.id %}">{{ product_for_men.product.name }}</a></h3>
+							<h3><a href="{% url 'product' product_for_men.product.category.category_name product_for_men.product.subcategory.subcategory_name product_for_men.product.id %}">{{ product_for_men.product.name }}</a></h3>
 							<div class="price">
 									<h5 class="item_price">${{ product_for_men.product.price }}</h5>
 									<button class="item_add">Add To Cart</button>
