@@ -30,7 +30,6 @@ class ProductDetail(TagMixin, DetailView):
 class ProductCommentCreate(FormView):
     template_name = 'products/product-comment.html'
     form_class = ProductCommentForm
-    success_url = '/thanks/'
 
     def form_valid(self, form):
         instance = form.save(commit=False)
