@@ -54,7 +54,6 @@ class ProductCommentList(TagMixin, ListView):
 
     def get_queryset(self):
         comments = ProductComment.objects.filter(product__id = self.kwargs['pk'])
-        print('COMMENTS',comments)
         return comments
 
     def get_context_data(self, **kwargs):
@@ -76,7 +75,6 @@ class ProductList(TagMixin, ListView):
         return context
 
 class CategoryProductList(ProductList):
-
     def get_queryset(self):
         products = ProductImage.objects.filter(product__subcategory__category__category_name=self.kwargs['product_category'],
                                                is_main=True)
@@ -88,7 +86,6 @@ class CategoryProductList(ProductList):
         return context
 
 class SubcategoryProductList(ProductList):
-
     def get_queryset(self):
         products = ProductImage.objects.filter(product__subcategory__category__category_name=self.kwargs['product_category'],
                                                is_main=True) \
@@ -121,9 +118,7 @@ class SearchListView(ProductList):
         return products
 
 class SearchAutocompleteView(View):
-
     def get(self, request):
-
         query = request.GET['query']
         products = Product.objects.filter(
                                                 Q(name__icontains=query) |
