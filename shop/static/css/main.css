@@ -102,3 +102,11 @@
     padding: 0.5em;
     margin: 0.5em 0;
 }
+.mation #id_username{
+    border: 1px solid #EEE;
+    outline-color: #fa03bb;
+    width: 100%;
+    font-size: 1em;
+    padding: 0.5em;
+    margin: 0.5em 0;
+}

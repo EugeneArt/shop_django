@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="account">
+	<div class="container">
+		<h2>Account</h2>
+		<div class="account_grid">
+			   <div class="col-md-6 login-right">
+				<form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form.username.errors }}
+					<span> Username </span>
+					{{ form.username }}
+
+                    {{ form.password.errors }}
+					<span>Password</span>
+					{{ form.password }}
+					<div class="word-in">
+				  		<a class="forgot" href="#">Forgot Your Password?</a>
+				 		 <input type="submit" value="Login">
+				  	</div>
+			    </form>
+			   </div>
+			    <div class="col-md-6 login-left">
+			  	 <h4>NEW CUSTOMERS</h4>
+				 <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
+				 <a class="acount-btn" href="{% url 'signup' %}">Create an Account</a>
+			   </div>
+			   <div class="clearfix"> </div>
+			 </div>
+	</div>
+</div>
+{% endblock %}

@@ -9,13 +9,13 @@
                   {{ form.non_field_errors }}
 				 <div class="col-md-6  register-top-grid">
 					<div class="mation">
-                        {{ form.fname.errors }}
+                        {{ form.first_name.errors }}
 						<span>First Name</span>
-						{{ form.fname}}
+						{{ form.first_name}}
 
-                        {{ form.fname.errors }}
+                        {{ form.last_name.errors }}
 						<span>Last Name</span>
-						{{ form.lname}}
+						{{ form.last_name}}
 
                          {{ form.email.errors }}
 						 <span>Email Address</span>
@@ -29,13 +29,18 @@
 				     <div class=" col-md-6 register-bottom-grid">
 
 							<div class="mation">
-                                 {{ form.password.errors }}
-								<span>Password</span>
-								{{ form.password}}
 
-                                {{ form.password.errors }}
+                                {{ form.username.errors }}
+                                <span>User Name</span>
+                                {{ form.username}}
+
+                                 {{ form.password1.errors }}
+								<span>Password</span>
+								{{ form.password1}}
+
+                                {{ form.password2.errors }}
 								<span>Confirm Password</span>
-								{{ form.confirmpassword}}
+								{{ form.password2}}
 							</div>
 					 </div>
 					 <div class="clearfix"> </div>
