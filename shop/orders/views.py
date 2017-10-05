@@ -1,5 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 from products.models import Product, ProductImage
 from orders.models import ProductInOrder
@@ -95,6 +97,7 @@ class OrderListView(View):
 
         return JsonResponse({'order_price': total_price})
 
+@method_decorator(login_required, name='dispatch')
 class OrderCheckoutView(FormView):
     template_name = 'orders/order-form.html'
     form_class = OrderForm

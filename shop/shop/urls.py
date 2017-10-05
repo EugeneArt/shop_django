@@ -17,12 +17,13 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import SignUpView, SignInView
+from .views import SignUpView, SignInView, SignOutView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^signup/$', SignUpView.as_view(), name='signup'),
     url(r'^signin/$', SignInView.as_view(), name='signin'),
+    url(r'^signout/$', SignOutView.as_view(), name='signout'),
     url(r'^', include('landing.urls')),
     url(r'^', include('products.urls')),
     url(r'^', include('orders.urls')),

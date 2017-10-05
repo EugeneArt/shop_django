@@ -1,5 +1,5 @@
 from django.views.generic.edit import FormView
-from  django.contrib.auth.views import LoginView
+from  django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import authenticate, login
 
 from .forms import SignUpForm
@@ -21,3 +21,6 @@ class SignUpView(FormView):
 
 class SignInView(LoginView):
     template_name = 'signin.html'
+
+class SignOutView(LogoutView):
+    pass
