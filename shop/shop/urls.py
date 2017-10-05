@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^regirstration/', RegistrationView.as_view(), name='registration'),
     url(r'^', include('landing.urls')),
     url(r'^', include('products.urls')),
     url(r'^', include('orders.urls')),
