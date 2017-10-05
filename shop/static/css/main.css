@@ -88,3 +88,17 @@
     font-size: 0.7rem;
     color: #7e7e7e;
 }
+.register-but input{
+    padding: 10px;
+    background: #fa03bb;
+    border: none;
+    color: #fff;
+}
+.mation #id_email{
+    border: 1px solid #EEE;
+    outline-color: #fa03bb;
+    width: 100%;
+    font-size: 1em;
+    padding: 0.5em;
+    margin: 0.5em 0;
+}

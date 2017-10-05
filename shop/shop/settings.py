@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'orders',
     'landing',
     'contact',
-    'taggit'
+    'taggit',
+    'shop'
 ]
 
 MIDDLEWARE = [
